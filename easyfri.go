@@ -82,7 +82,6 @@ func SetDimForGroupByName(regex string, value int) []Device {
 		tmp, _ := regexp.MatchString(regex, g.Name)
 		if tmp {
 			for _, d := range g.Devices {
-				// SetDim(d, value)
 				devices = append(devices, SetDim(d, value))
 			}
 		}
@@ -97,7 +96,6 @@ func SetDimForGroup(group_id int, value int) []Device {
 	for _, g := range groups {
 		if g.Id == group_id {
 			for _, d := range g.Devices {
-				// SetDim(d, value)
 				devices = append(devices, SetDim(d, value))
 			}
 		}
@@ -114,7 +112,6 @@ func SetPowerForGroupByName(regex string, state bool) []Device {
 		tmp, _ := regexp.MatchString(regex, g.Name)
 		if tmp {
 			for _, d := range g.Devices {
-				// SetDim(d, value)
 				devices = append(devices, SetPower(d, state))
 			}
 		}
@@ -146,7 +143,6 @@ func SwitchPowerForGroupByName(regex string) []Device {
 		tmp, _ := regexp.MatchString(regex, g.Name)
 		if tmp {
 			for _, d := range g.Devices {
-				// SetDim(d, value)
 				devices = append(devices, SwitchPower(d))
 			}
 		}
