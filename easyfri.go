@@ -42,14 +42,10 @@ func SetPower(device_id int, state bool) Device {
 		tmp = 0
 	}
 
-	if GetDevice(device_id).Type != "TRADFRI remote control" {
+	_, err := tc.PutDevicePower(device_id, tmp)
 
-		_, err := tc.PutDevicePower(device_id, tmp)
-
-		if err != nil {
-			logrus.Debug("%v", err)
-		}
-
+	if err != nil {
+		logrus.Debug("%v", err)
 	}
 
 	return GetDevice(device_id)
@@ -207,10 +203,14 @@ func GetDevice(device_id int) Device {
 	d.Name = device.Name
 	d.Id = device.DeviceId
 	d.Alive = device.Alive
-	d.State = !(device.LightControl[0].Power == 0)
-	d.Dimmer = device.LightControl[0].Dimmer
-	d.RGBHex = device.LightControl[0].RGBHex
-	d.Temperatur = device.LightControl[0].ColorTemperature
+
+	if !(d.Type == "TRADFRI remote control") {
+
+		d.State = !(device.LightControl[0].Power == 0)
+		d.Dimmer = device.LightControl[0].Dimmer
+		d.RGBHex = device.LightControl[0].RGBHex
+		d.Temperatur = device.LightControl[0].ColorTemperature
+	}
 
 	return d
 }
