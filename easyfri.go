@@ -42,10 +42,14 @@ func SetPower(device_id int, state bool) Device {
 		tmp = 0
 	}
 
-	_, err := tc.PutDevicePower(device_id, tmp)
+	if GetDevice(device_id).Type != "TRADFRI remote control" {
 
-	if err != nil {
-		logrus.Debug("%v", err)
+		_, err := tc.PutDevicePower(device_id, tmp)
+
+		if err != nil {
+			logrus.Debug("%v", err)
+		}
+
 	}
 
 	return GetDevice(device_id)
