@@ -74,6 +74,15 @@ func SetDim(device_id int, value int) Device {
 	return GetDevice(device_id)
 }
 
+func SwitchPower(device_id int) Device {
+
+	device := GetDevice(device_id)
+
+	device = SetPower(device_id, !device.State)
+
+	return device
+}
+
 func SetDimForGroupByName(regex string, value int) []Device {
 	groups := GetGroups()
 
@@ -165,15 +174,6 @@ func SwitchPowerForGroup(group_id int) []Device {
 	fmt.Println(devices)
 
 	return devices
-}
-
-func SwitchPower(device_id int) Device {
-
-	device := GetDevice(device_id)
-
-	device = SetPower(device_id, !device.State)
-
-	return device
 }
 
 func GetGroups() []Group {
