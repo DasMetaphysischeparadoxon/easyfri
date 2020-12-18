@@ -5,6 +5,7 @@ import (
 	"github.com/eriklupander/tradfri-go/tradfri"
 	"github.com/sirupsen/logrus"
 	"regexp"
+	"time"
 )
 
 var (
@@ -194,6 +195,8 @@ func GetGroups() []Group {
 }
 
 func GetDevice(device_id int) Device {
+
+	time.Sleep(time.Millisecond * 200)
 
 	device, _ := tc.GetDevice(device_id)
 
